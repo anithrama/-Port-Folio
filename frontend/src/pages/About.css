@@ -1,0 +1,142 @@
+.about-v2 {
+  animation: about-fade 420ms ease;
+}
+
+.about-v2-hero {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    145deg,
+    rgba(127, 211, 255, 0.14),
+    rgba(255, 154, 86, 0.11)
+  );
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+}
+
+.about-v2-tag {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #e6f5ff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.about-v2-hero h2 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 42px);
+}
+
+.about-v2-hero p {
+  margin: 10px 0 0;
+  color: #e5eeff;
+  line-height: 1.65;
+}
+
+.about-v2-grid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.about-v2-card {
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.about-v2-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(127, 211, 255, 0.65);
+}
+
+.about-v2-card h3 {
+  margin: 0 0 10px;
+  color: #d7f0ff;
+}
+
+.about-v2-card ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.6;
+  color: #dce6ff;
+}
+
+.about-v2-card p {
+  margin: 0;
+  line-height: 1.6;
+  color: #dce6ff;
+}
+
+.edu-item + .edu-item {
+  margin-top: 12px;
+}
+
+.edu-item h4 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.edu-item p {
+  margin: 4px 0 0;
+  color: #b9cfff;
+}
+
+.stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stack-tags span {
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f3f8ff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(8, 25, 44, 0.5);
+}
+
+.about-v2-summary {
+  margin-top: 14px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.about-v2-summary h3 {
+  margin: 0 0 8px;
+}
+
+.about-v2-summary p {
+  margin: 0;
+  line-height: 1.7;
+  color: #dce8ff;
+}
+
+@keyframes about-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .about-v2-grid {
+    grid-template-columns: 1fr;
+  }
+}

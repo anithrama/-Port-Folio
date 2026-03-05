@@ -1,13 +1,15 @@
 import React,{useEffect,useState} from "react"
 import axios from "axios"
 
+const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000"
+
 function Projects(){
 
 const [projects,setProjects] = useState([])
 
 useEffect(()=>{
 
-axios.get("http://127.0.0.1:8000/api/projects/")
+axios.get(`${API_BASE}/api/projects/`)
 .then(res=>{
 setProjects(res.data)
 })

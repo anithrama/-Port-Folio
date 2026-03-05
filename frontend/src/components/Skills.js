@@ -1,13 +1,15 @@
 import React,{useEffect,useState} from "react"
 import axios from "axios"
 
+const API_BASE = process.env.REACT_APP_API_BASE || "http://127.0.0.1:8000"
+
 function Skills(){
 
 const [skills,setSkills] = useState([])
 
 useEffect(()=>{
 
-axios.get("http://127.0.0.1:8000/api/skills/")
+axios.get(`${API_BASE}/api/skills/`)
 .then(res=>{
 setSkills(res.data)
 })

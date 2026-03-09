@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Contact.css";
 
 const contactItems = [
@@ -13,14 +13,14 @@ const contactItems = [
     icon: "EM",
     type: "Email",
     detail: "anithra2002@gmail.com",
-    href: "mailto:anithra2002@gmail.com",
-    action: "Send Email",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=anithra2002@gmail.com",
+    action: "Open Gmail",
   },
   {
     icon: "IN",
     type: "LinkedIn",
     detail: "linkedin.com/in/anithra",
-    href: "https://www.linkedin.com/in/anithra",
+    href: "https://www.linkedin.com/in/anithra-m-a-aa249438b?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     action: "Open LinkedIn",
   },
   {
@@ -33,6 +33,49 @@ const contactItems = [
 ];
 
 function Contact() {
+  const [submitStatus, setSubmitStatus] = useState("");
+
+  const encode = (data) =>
+    Object.keys(data)
+      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join("&");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+    const botField = form["bot-field"]?.value || "";
+
+    if (!name || !email || !subject || !message) {
+      window.alert("Please fill in all fields before sending.");
+      return;
+    }
+
+    try {
+      setSubmitStatus("sending");
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({
+          "form-name": "contact",
+          "bot-field": botField,
+          name,
+          email,
+          subject,
+          message,
+        }),
+      });
+
+      form.reset();
+      setSubmitStatus("success");
+    } catch (error) {
+      setSubmitStatus("error");
+    }
+  };
+
   return (
     <section className="contact-page">
       <header className="contact-hero">
@@ -62,17 +105,26 @@ function Contact() {
           ))}
         </div>
 
-        <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+        <form
+          className="contact-form"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="bot-field" />
           <h3>Send Message</h3>
 
           <label htmlFor="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" />
+          <input id="name" name="name" type="text" placeholder="Your name" required />
 
           <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="your@email.com" />
+          <input id="email" name="email" type="email" placeholder="your@email.com" required />
 
           <label htmlFor="subject">Subject</label>
-          <input id="subject" name="subject" type="text" placeholder="Subject" />
+          <input id="subject" name="subject" type="text" placeholder="Subject" required />
 
           <label htmlFor="message">Message</label>
           <textarea
@@ -80,9 +132,13 @@ function Contact() {
             name="message"
             rows="5"
             placeholder="Write your message..."
+            required
           />
 
           <button type="submit">Send Message</button>
+          {submitStatus === "sending" && <p>Sending message...</p>}
+          {submitStatus === "success" && <p>Message sent successfully.</p>}
+          {submitStatus === "error" && <p>Failed to send message. Try again.</p>}
         </form>
       </div>
     </section>

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -11,7 +11,7 @@ import "./pages/Home.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="home-page">
         <div className="bg-orb orb-one" aria-hidden="true" />
         <div className="bg-orb orb-two" aria-hidden="true" />
@@ -27,7 +27,7 @@ function App() {
           </Routes>
         </main>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

@@ -1,6 +1,8 @@
 import React from "react";
 
 function Resume() {
+  const resumeUrl = `${process.env.PUBLIC_URL}/Anithra_fullstack_developer.pdf`;
+
   return (
     <section className="section-card">
       <h2>Resume</h2>
@@ -10,7 +12,7 @@ function Resume() {
       </p>
       <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "12px" }}>
         <a
-          href="/Anithra_fullstack_developer.pdf"
+          href={resumeUrl}
           target="_blank"
           rel="noreferrer"
           style={{
@@ -25,7 +27,7 @@ function Resume() {
           View Resume
         </a>
         <a
-          href="/Anithra_fullstack_developer.pdf"
+          href={resumeUrl}
           download
           style={{
             textDecoration: "none",
